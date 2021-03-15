@@ -1,0 +1,127 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: >
+  RestApp
+
+  Sample SAM Template for RestApp
+
+# More info about Globals: https://github.com/awslabs/serverless-application-model/blob/master/docs/globals.rst
+Globals:
+  Function:
+    Timeout: 20
+
+Resources:
+  GetAllProductFunction:
+    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+    Properties:
+      CodeUri: HelloWorldFunction
+      Handler: helloworld.ProductRequestHandler::getAllProducts
+      Policies:
+        DynamoDBCrudPolicy:
+          TableName: !Ref ProductTable
+      Runtime: java11
+      MemorySize: 512
+      Environment: 
+        Variables:
+          PARAM1: VALUE
+      Events:
+        HelloWorld:
+          Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
+          Properties:
+            Path: /products
+            Method: get
+  
+  GetProductByIdFunction:
+    Type: AWS::Serverless::Function 
+    Properties:
+      CodeUri: HelloWorldFunction
+      Handler: helloworld.ProductRequestHandler::getProductById
+      Policies:
+        DynamoDBCrudPolicy:
+          TableName: !Ref ProductTable
+      Runtime: java11
+      MemorySize: 512
+      Environment:
+        Variables:
+          PARAM1: VALUE
+      Events:
+        HelloWorld:
+          Type: Api
+          Properties:
+            Path: /product/{id}
+            Method: get
+  CreateProductFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: HelloWorldFunction
+      Handler: helloworld.ProductRequestHandler::createProduct
+      Policies:
+        DynamoDBCrudPolicy:
+          TableName: !Ref ProductTable
+      Runtime: java11
+      MemorySize: 512
+      Environment: 
+        Variables:
+          PARAM1: VALUE
+      Events:
+        HelloWorld:
+          Type: Api
+          Properties:
+            Path: /product
+            Method: post
+  UpdateProductFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: HelloWorldFunction
+      Handler: helloworld.ProductRequestHandler::updateProduct
+      Policies:
+        DynamoDBCrudPolicy:
+          TableName: !Ref ProductTable
+      Runtime: java11
+      MemorySize: 512
+      Environment: 
+        Variables:
+          PARAM1: VALUE
+      Events:
+        HelloWorld:
+          Type: Api
+          Properties:
+            Path: /product/{id}
+            Method: put
+  DeleteProductFunction:
+    Type: AWS::Serverless::Function 
+    Properties:
+      CodeUri: HelloWorldFunction
+      Handler: helloworld.ProductRequestHandler::deleteProduct
+      Policies:
+        DynamoDBCrudPolicy:
+          TableName: !Ref ProductTable
+      Runtime: java11
+      MemorySize: 512
+      Environment: 
+        Variables:
+          PARAM1: VALUE
+      Events:
+        HelloWorld:
+          Type: Api
+          Properties:
+            Path: /product/{id}
+            Method: delete
+
+  ProductTable:
+    Type: AWS::Serverless::SimpleTable
+    Properties:
+      TableName: product-store
+      PrimaryKey:
+        Name: id
+        Type: String
+      ProvisionedThroughput:
+        ReadCapacityUnits: 1
+        WriteCapacityUnits: 1
+Outputs:
+  # ServerlessRestApi is an implicit API created out of Events key under Serverless::Function
+  # Find out more about other implicit resources you can reference within SAM
+  # https://github.com/awslabs/serverless-application-model/blob/master/docs/internals/generated_resources.rst#api
+  HelloWorldApi:
+    Description: "API Gateway endpoint URL for Prod stage for Hello World function"
+    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/hello/"
