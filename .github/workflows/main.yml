@@ -30,7 +30,7 @@ jobs:
         run: sam validate
       
       - name: build app
-        run: sam package --output-template-file packaged.yaml --s3-bucket aws-sam-cli-managed-default-samclisourcebucket-intlurdt0fz3
+        run: sam build
       
       - name: deploy to aws
-        run: sam deploy --template-file packaged.yaml --stack-name sam-rest-api --s3-bucket aws-sam-cli-managed-default-samclisourcebucket-intlurdt0fz3 --capabilities CAPABILITY_IAM --region us-east-1
+        run: sam deploy
