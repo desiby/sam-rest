@@ -33,4 +33,7 @@ jobs:
         run: sam build
       
       - name: deploy to aws
-        run: sam deploy --stack-name sam-rest-api --s3-bucket dbb-aws-sam-artifacts --template-file .aws-sam/build/template.yaml
+        run: sam deploy --stack-name sam-rest-api \ 
+        --s3-bucket dbb-aws-sam-artifacts \
+        --template-file .aws-sam/build/template.yaml \
+        --capabilities CAPABILITY_IAM
