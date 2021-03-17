@@ -15,7 +15,7 @@ public class ProductDaoImpl implements ProductDao {
     private AmazonDynamoDB client;
 	private DynamoDBMapper mapper;
 
-    private static final boolean RUN_LOCALLY = true;
+    private static final boolean RUN_LOCALLY = false;
     
     public ProductDaoImpl(){
         
