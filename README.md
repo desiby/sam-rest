@@ -1,6 +1,6 @@
 # RestApp
 
-This project contains source code and supporting files for a serverless application that you can deploy with the SAM CLI. It includes the following files and folders.
+This project contains source code and supporting files for a serverless application that you can deploy with the SAM CLI. It implements a REST API with CRUD functionality developed using SAM with java 11 runtime and DynamoDB It includes the following files and folders.
 
 - HelloWorldFunction/src/main - Code for the application's Lambda function.
 - events - Invocation events that you can use to invoke the function.

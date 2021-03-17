@@ -24,6 +24,7 @@ public class ProductRequestHandler{
     //dependency injection
     private ProductDao dao;
 
+
     public void setDao(ProductDao dao) {
         this.dao = dao;
     }
