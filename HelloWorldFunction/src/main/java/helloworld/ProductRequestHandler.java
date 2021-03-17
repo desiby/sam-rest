@@ -35,7 +35,7 @@ public class ProductRequestHandler{
         return this.dao;
     }
 
-    //LIST ALL PRODUCTS
+    //GET /products
     public APIGatewayProxyResponseEvent getAllProducts(APIGatewayProxyRequestEvent input, Context context) {
         List<Product> products = this.getProductDao().listAllProducts(); 
         LambdaLogger lambdalogger = context.getLogger();
@@ -53,7 +53,7 @@ public class ProductRequestHandler{
 		}
     }
 
-    //CREATE A PRODUCT
+    //POST /product
     public APIGatewayProxyResponseEvent createProduct(APIGatewayProxyRequestEvent request, Context context) {
 		LambdaLogger lambdalogger = context.getLogger();
         String body = request.getBody();
@@ -72,7 +72,7 @@ public class ProductRequestHandler{
 		}
 	}
 
-    //UPDATE A PRODUCT
+    //PUT /product
     public APIGatewayProxyResponseEvent updateProduct(APIGatewayProxyRequestEvent request, Context context) throws JsonParseException {
         LambdaLogger lambdalogger = context.getLogger(); 
         
@@ -93,7 +93,7 @@ public class ProductRequestHandler{
 		}
     }
 
-    //GET A PRODUCT BY ID
+    //GET /product/{id}
     public APIGatewayProxyResponseEvent getProductById(APIGatewayProxyRequestEvent request, Context context) {
         LambdaLogger lambdalogger = context.getLogger(); 
         String id = request.getPathParameters().get("id"); 
@@ -117,7 +117,7 @@ public class ProductRequestHandler{
 		}
     }
 
-    //DELETE A PRODUCT
+    //DELETE /product
     public APIGatewayProxyResponseEvent deleteProduct(APIGatewayProxyRequestEvent request, Context context) {
         LambdaLogger lambdalogger = context.getLogger(); 
 

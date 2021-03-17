@@ -9,6 +9,8 @@ Description: >
 Globals:
   Function:
     Timeout: 20
+    Layers:
+    - !Sub "arn:aws:lambda:${AWS::Region}:580247275435:layer:LambdaInsightsExtension:14"
 
 Resources:
   GetAllProductFunction:
@@ -17,13 +19,14 @@ Resources:
       CodeUri: HelloWorldFunction
       Handler: helloworld.ProductRequestHandler::getAllProducts
       Policies:
-        DynamoDBCrudPolicy:
+      - arn:aws:iam::aws:policy/CloudWatchLambdaInsightsExecutionRolePolicy
+      - DynamoDBCrudPolicy:
           TableName: !Ref ProductTable
       Runtime: java11
       MemorySize: 512
       Environment: 
         Variables:
-          PARAM1: VALUE
+          LAMBDA_INSIGHTS_LOG_LEVEL: info
       Events:
         HelloWorld:
           Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
@@ -37,13 +40,14 @@ Resources:
       CodeUri: HelloWorldFunction
       Handler: helloworld.ProductRequestHandler::getProductById
       Policies:
-        DynamoDBCrudPolicy:
+      - arn:aws:iam::aws:policy/CloudWatchLambdaInsightsExecutionRolePolicy
+      - DynamoDBCrudPolicy:
           TableName: !Ref ProductTable
       Runtime: java11
       MemorySize: 512
       Environment:
         Variables:
-          PARAM1: VALUE
+          LAMBDA_INSIGHTS_LOG_LEVEL: info
       Events:
         HelloWorld:
           Type: Api
@@ -56,13 +60,14 @@ Resources:
       CodeUri: HelloWorldFunction
       Handler: helloworld.ProductRequestHandler::createProduct
       Policies:
-        DynamoDBCrudPolicy:
+      - arn:aws:iam::aws:policy/CloudWatchLambdaInsightsExecutionRolePolicy
+      - DynamoDBCrudPolicy:
           TableName: !Ref ProductTable
       Runtime: java11
       MemorySize: 512
       Environment: 
         Variables:
-          PARAM1: VALUE
+          LAMBDA_INSIGHTS_LOG_LEVEL: info
       Events:
         HelloWorld:
           Type: Api
@@ -75,13 +80,14 @@ Resources:
       CodeUri: HelloWorldFunction
       Handler: helloworld.ProductRequestHandler::updateProduct
       Policies:
-        DynamoDBCrudPolicy:
+      - arn:aws:iam::aws:policy/CloudWatchLambdaInsightsExecutionRolePolicy
+      - DynamoDBCrudPolicy:
           TableName: !Ref ProductTable
       Runtime: java11
       MemorySize: 512
       Environment: 
         Variables:
-          PARAM1: VALUE
+          LAMBDA_INSIGHTS_LOG_LEVEL: info
       Events:
         HelloWorld:
           Type: Api
@@ -94,13 +100,14 @@ Resources:
       CodeUri: HelloWorldFunction
       Handler: helloworld.ProductRequestHandler::deleteProduct
       Policies:
-        DynamoDBCrudPolicy:
+      - arn:aws:iam::aws:policy/CloudWatchLambdaInsightsExecutionRolePolicy
+      - DynamoDBCrudPolicy:
           TableName: !Ref ProductTable
       Runtime: java11
       MemorySize: 512
       Environment: 
         Variables:
-          PARAM1: VALUE
+          LAMBDA_INSIGHTS_LOG_LEVEL: info
       Events:
         HelloWorld:
           Type: Api
